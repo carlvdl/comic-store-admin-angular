@@ -1,0 +1,69 @@
+<!--https://ng-bootstrap.github.io/#/components/dropdown/examplesl-->
+<!--https://getbootstrap.com/docs/4.0/components/navbar/-->
+
+<!--<li><a *ngIf="hardCodedAuthenticationService.isUserLoggedIn()" routerLink="/welcome/batman" class="nav-link">Home</a></li>-->
+
+
+<header *ngIf="hardCodedAuthenticationService.isUserLoggedIn()" >
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+
+    <div class="navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown1" role="button">
+            Admin
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+            <a routerLink="/adminUsers" ngbDropdownItem  (click)="$event.preventDefault()">Admin Users</a>
+            <a routerLink="/roles" ngbDropdownItem  (click)="$event.preventDefault()">Roles</a>
+          </div>
+        </li>
+
+
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown2" role="button">
+            Customers
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+            <a routerLink="/customers" ngbDropdownItem (click)="$event.preventDefault()">View Customers</a>
+          </div>
+        </li>
+
+        <li class="nav-item" ngbDropdown>
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown3" role="button">
+            Orders
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-right">
+            <a routerLink="/orders" ngbDropdownItem   (click)="$event.preventDefault()">View Orders</a>
+          </div>
+        </li>
+
+        <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
+          <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown4" role="button">
+            Comics
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+            <a ngbDropdownItem routerLink="/gradings" (click)="$event.preventDefault()">Gradings</a>
+            <a ngbDropdownItem routerLink="/titles" href="#" (click)="$event.preventDefault()">Titles</a>
+            <a ngbDropdownItem routerLink="/publishers" (click)="$event.preventDefault()">Publisher</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="navbar-nav ml-auto">
+      <a routerLink="/logout"  class="nav-item nav-link">Logout</a>
+    </div>
+  </nav>
+
+</header>
+
+
+<header *ngIf="!hardCodedAuthenticationService.isUserLoggedIn() " >
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="navbar-nav ml-auto">
+      <a  routerLink="/login"  class="nav-item nav-link">Login</a>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,27 @@
+<div class="jumbotron">
+  <div class="container">
+
+
+    <div class="col-md-6 offset-md-3">
+
+      <div>
+        <small *ngIf="invalidLogin">{{errorMessage}}</small>
+      </div>
+
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="text" class="form-control" id="usermame" placeholder="Enter email" name="username"
+               [(ngModel)]="username">
+      </div>
+
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password"
+               [(ngModel)]="password">
+      </div>
+
+      <button (click)="handleLogin()" class="btn btn-primary">Login</button>
+    </div>
+
+  </div>
+</div>
