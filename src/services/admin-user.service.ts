@@ -22,19 +22,15 @@ export class AdminUserService {
   get total$(): BehaviorSubject<number> {
     return this._total$;
   }
-  //
-  // httpOptions = {
-  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  // };
-
 
   // findUsers(filter: string, sortOrder: string, pageNumber: number, pageSize: number): Observable<HttpResponse<AdminUser[]>> {
   findUsers(filter: string, sortOrder: string, limit: number, offset: number): Observable<HttpResponse<AdminUser[]>> {
-    console.log('\n\n----> find users, limit...');
+
+    console.log('\n\nfind users, limit...');
     console.log(limit);
     console.log('find users, offset...');
     console.log(offset);
-    console.log('<-------\n');
+
     const result = this.http.get<any>(
       'http://localhost:8080/adminUsers',
       {
