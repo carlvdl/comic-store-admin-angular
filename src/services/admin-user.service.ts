@@ -13,19 +13,7 @@ export class AdminUserService {
   private _total$ = new BehaviorSubject<number>(0);
 
 
-  constructor(private http: HttpClient) {
-
-    // this.findUsers('', '', 0, 3).subscribe(response => {
-    //   this._adminUsers$.next(response.body);
-    //   console.log('..');
-    //   console.log('..');
-    //   console.log('..');
-    //   console.log('..');
-    //   console.log(response.headers.get('x-total-count'));
-    //   this._total$.next(parseInt(response.headers.get('x-total-count')));
-    // });
-    //
-  }
+  constructor(private http: HttpClient) {}
 
   get adminUsers$(): BehaviorSubject<AdminUser[]> {
     return this._adminUsers$;
@@ -40,58 +28,26 @@ export class AdminUserService {
   // };
 
 
-  findUsers(filter: string, sortOrder: string, pageNumber: number, pageSize: number): Observable<HttpResponse<AdminUser[]>> {
-    console.log('find users...');
-    const result =  this.http.get<any>(
+  // findUsers(filter: string, sortOrder: string, pageNumber: number, pageSize: number): Observable<HttpResponse<AdminUser[]>> {
+  findUsers(filter: string, sortOrder: string, limit: number, offset: number): Observable<HttpResponse<AdminUser[]>> {
+    console.log('\n\n----> find users, limit...');
+    console.log(limit);
+    console.log('find users, offset...');
+    console.log(offset);
+    console.log('<-------\n');
+    const result = this.http.get<any>(
       'http://localhost:8080/adminUsers',
       {
-        observe: 'response'
+        observe: 'response',
+        params: new HttpParams()
+          .set('filter', filter)
+          .set('sortOrder', sortOrder)
+          .set('offset', offset.toString())
+          .set('limit', limit.toString())
       })
     return result;
-
-    // const result =  this.http.get<any>(
-    //   'http://localhost:8080/adminUsers',
-    //   {
-    //     observe: 'response',
-    //     params: new HttpParams()
-    //       .set('filter', filter)
-    //       .set('sortOrder', sortOrder)
-    //       .set('pageNumber', pageNumber.toString())
-    //       .set('pageSize', pageSize.toString())
-    //   });
-    // console.log('result-->');
-    // console.log(result);
-    // result.subscribe(response => {
-    //   console.log('response-->');
-    //   console.log(response);
-    //   console.log(response.headers);
-    //   // this._users$.next(response.body);
-    //   // this._total$.next(parseInt(response.headers.get('x-total-count')));
-    // });
-
-    // const result =  this.http.get<AdminUser[]>(
-    //   'http://localhost:8080/adminUsers',
-    //   {
-    //     observe: 'response',
-    //     params: new HttpParams()
-    //       .set('filter', filter)
-    //       .set('sortOrder', sortOrder)
-    //       .set('pageNumber', pageNumber.toString())
-    //       .set('pageSize', pageSize.toString())
-    //   });
-    // console.log('result-->');
-    // console.log(result);
-    // result.subscribe(response =>{
-    //   console.log('response-->');
-    //   console.log(response);
-    //   // this._users$.next(response.body);
-    //   // this._total$.next(parseInt(response.headers.get('x-total-count')));
-    // })
   }
 
-  // findAll(page: number, pageSize: number) {
-  //   return this.http.get<AdminUser[]>('http://localhost:8080/adminusers');
-  // }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

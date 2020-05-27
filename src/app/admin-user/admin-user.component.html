@@ -22,14 +22,11 @@
   </table>
 
 
-  <!---->
-  <div>
-    x-> {{total$ | async}}
-  </div>
-  <ngb-pagination [collectionSize]="total$ | async"
+
+  <ngb-pagination [collectionSize]="total"
                   [pageSize]="pageSize"
                   (pageChange)="onPageChange($event)"
-                  [(page)]="page" [maxSize]="5" [rotate]="true"
+                  [(page)]="page" [maxSize]="pageSize" [rotate]="true"
                   [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
 
 </div>
