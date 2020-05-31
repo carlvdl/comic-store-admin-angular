@@ -1,0 +1,74 @@
+
+
+<!--<div *ngIf="adminUser">-->
+<!--{{adminUser.adminUserId}}-->
+<!--</div>-->
+<div class="jumbotron">
+  <div class="container" *ngIf="adminUser">
+    <div class="col-md-6 offset-md-3" [hidden]="submitted">
+      <!--<h1 *ngIf="addNew">Add Publisher</h1>-->
+      <!--<h1 *ngIf="!addNew">Edit Publisher< /h1>-->
+
+      <form >
+
+        <div class="form-group">
+
+          <div class="form-group">
+            <label for="email">Code</label>
+            <input type="text" class="form-control" id="email" required [(ngModel)]="adminUser.email" name="email"
+                   required minlength="10"
+                   #email="ngModel">
+            <!--<div [hidden]="email.valid || email.pristine"-->
+                 <!--class="alert alert-danger">-->
+              <!--email of min length 10 is required-->
+            <!--</div>-->
+          </div>
+
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" required [(ngModel)]="adminUser.firstName" name="firstName"
+                 required minlength="2"
+                 #code="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label for="firstName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" required [(ngModel)]="adminUser.lastName" name="lastName"
+                   required minlength="2"
+                   #code="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label for="firstName">Phone Number</label>
+            <input type="text" class="form-control" id="phoneNumber" required [(ngModel)]="adminUser.phoneNumber" name="phoneNumber"
+                   required minlength="2"
+                   #code="ngModel">
+          </div>
+
+          <div class="form-group">
+            <!--<form id="singleUploadForm" name="singleUploadForm">-->
+            <label for="firstName">Upload a file</label>
+            <input id="singleFileUploadInput" type="file" name="file"
+                     (change)="upload($event.target.files)"  />
+
+              <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+
+            <!--</form>-->
+            <div class="upload-response">
+              <div id="singleFileUploadError"></div>
+              <div id="singleFileUploadSuccess"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button (click)="saveAdminUser()" class="btn btn-primary">Save</button>
+          </div>
+          <!--<div class="form-group">-->
+          <!--<button class="btn btn-primary"  [disabled]="!publisherForm.valid">Update</button>-->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

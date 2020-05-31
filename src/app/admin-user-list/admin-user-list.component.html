@@ -1,0 +1,45 @@
+
+<div class="container">
+  <table class="table">
+
+
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>email</th>
+      <th>first name</th>
+      <th>phone number</th>
+      <th>date added</th>
+    </tr>
+    </thead>
+
+    <!--/detail/{{hero.id}}-->
+    <tbody>
+    <tr *ngFor="let adminUser of adminUsers  ">
+      <td>{{adminUser.adminUserId}}</td>
+      <!--<td><a (click)="editAdminUser(adminUser)" >{{adminUser.email}}</a></td>-->
+      <td><a routerLink="/adminUser/{{adminUser.adminUserId}}"> {{adminUser.email}}</a></td>
+      <td>{{adminUser.firstName}}</td>
+      <td>{{adminUser.phoneNumber}}</td>
+
+      <td>{{adminUser.dateAdded}}</td>
+    </tr>
+    </tbody>
+
+  </table>
+
+
+
+  <ngb-pagination [collectionSize]="total"
+                  [pageSize]="pageSize"
+                  (pageChange)="onPageChange($event)"
+                  [(page)]="pageNumber" [maxSize]="pageSize" [rotate]="true"
+                  [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+
+  <div  class="container" >
+    <button type="button" class="btn btn-primary" routerLink="/adminUser"  >
+      Add User
+    </button>
+  </div>
+
+</div>

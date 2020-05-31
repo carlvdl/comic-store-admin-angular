@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LogoutComponent } from './logout/logout.component';
-import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
+import { AdminUserEditComponent } from './admin-user-edit/admin-user-edit.component';
 
 // import { NgbdDropdownBasic } from './dropdown-basic';
 
@@ -25,7 +26,8 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
     FooterComponent,
     HomeComponent,
     LogoutComponent,
-    AdminUserComponent
+    AdminUserListComponent,
+    AdminUserEditComponent
   ],
   imports: [
     BrowserModule,

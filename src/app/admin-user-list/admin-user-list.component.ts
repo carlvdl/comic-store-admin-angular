@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminUserService} from '../../services/admin-user.service';
+import {AdminUser} from '../models/AdminUser';
 
 @Component({
   selector: 'app-admin-user',
-  templateUrl: './admin-user.component.html',
-  styleUrls: ['./admin-user.component.css']
+  templateUrl: './admin-user-list.component.html',
+  styleUrls: ['./admin-user-list.component.css']
 })
-export class AdminUserComponent implements OnInit {
+export class AdminUserListComponent implements OnInit {
 
   // protected adminUsers$: Observable<AdminUser[]>;
   // protected total$: Observable<number>;
@@ -49,6 +50,23 @@ export class AdminUserComponent implements OnInit {
     );
   }
 
+
+  // editAdminUser(userId: number): void {
+  // editAdminUser(adminUser: AdminUser): void {
+  //   console.log('Edit..');
+  //   console.log(adminUser);
+    // const adminUser  = this.adminUserService.findAdminUserById(userId);
+
+    // xx TODO redirect to edit page
+    // window.localStorage.removeItem("editUserId");
+    // window.localStorage.setItem("editUserId", user.id.toString());
+    // this.router.navigate(['edit-user']);
+  // }
+
+  delete(id: number) {
+    console.log('deleting...');
+    // this.adminUserService.deleteAdminUser(id).subscribe();
+  }
 
   onPageChange(pageNumber: number) {
     console.log('pageNumber');
