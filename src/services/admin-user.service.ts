@@ -30,6 +30,41 @@ export class AdminUserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  // headers = new HttpHeaders({
+  //   Authorization: this.createBasicAuthenticationHttpHeader()
+  // })
+
+  // createBasicAuthenticationHttpHeader() {
+  //   const username = 'user';
+  //   const password = 'user';
+  //   const basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+  //   return basicAuthHeaderString;
+  // }
+
+
+
+  // findUsers(filter: string, sortOrder: string, pageNumber: number, pageSize: number): Observable<HttpResponse<AdminUser[]>> {
+  findUsers(filter: string, sortOrder: string, limit: number, offset: number): Observable<HttpResponse<AdminUser[]>> {
+
+    console.log('\n\nfind users, limit...');
+    console.log(limit);
+    console.log('find users, offset...');
+    console.log(offset);
+
+    const result = this.http.get<AdminUser[]>(
+      'http://localhost:8080/adminUsers',
+      {
+        // headers: this.headers,
+        observe: 'response',
+        params: new HttpParams()
+          .set('filter', filter)
+          .set('sortOrder', sortOrder)
+          .set('offset', offset.toString())
+          .set('limit', limit.toString())
+      });
+    return result;
+  }
+
 
   updateAdminUserImage( file: File, adminUserId: number)  {
 
@@ -63,27 +98,6 @@ export class AdminUserService {
       );
   }
 
-
-  // findUsers(filter: string, sortOrder: string, pageNumber: number, pageSize: number): Observable<HttpResponse<AdminUser[]>> {
-  findUsers(filter: string, sortOrder: string, limit: number, offset: number): Observable<HttpResponse<AdminUser[]>> {
-
-    console.log('\n\nfind users, limit...');
-    console.log(limit);
-    console.log('find users, offset...');
-    console.log(offset);
-
-    const result = this.http.get<AdminUser[]>(
-      'http://localhost:8080/adminUsers',
-      {
-        observe: 'response',
-        params: new HttpParams()
-          .set('filter', filter)
-          .set('sortOrder', sortOrder)
-          .set('offset', offset.toString())
-          .set('limit', limit.toString())
-      });
-    return result;
-  }
 
 
   getAdminUserById(id: number) {

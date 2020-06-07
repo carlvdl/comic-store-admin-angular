@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {HardCodedAuthenticationService} from '../../services/hard-coded-authentication.service';
+import {BasicAuthenticationService} from '../../services/basic-authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +16,26 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
 
   constructor(private router: Router,
-              private hardCodedAuthenticationService: HardCodedAuthenticationService) { }
+              private hardCodedAuthenticationService: HardCodedAuthenticationService,
+              private basicAuthenticationService: BasicAuthenticationService
+              ) { }
 
   ngOnInit() {
   }
 
 
+  handleBasicAuthLogin() {
+    console.log('handleBasicAuthLogin---');
+    this.basicAuthenticationService.executeJWTAuthenticationService(this.username, this.password)
+      .subscribe(
+        data => {
+          console.log('handleBasicAuthLogin, routing?');
+          this.router.navigate(['home']);
+          this.invalidLogin = false;
+          console.log('routed');
 
+        });
+  }
   handleLogin() {
     console.log('\nusername: ' + this.username);
     console.log('\npassword: ' + this.password);

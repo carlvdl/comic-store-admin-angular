@@ -1,0 +1,87 @@
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {map} from 'rxjs/operators';
+import {pipe} from 'rxjs';
+
+export const TOKEN = 'token';
+export const AUTHENTICATED_USER = 'authenticatedUser';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BasicAuthenticationService {
+  // private API_URL: 'http://localhost:8080';
+  // private urlString: string;
+
+  constructor(private http: HttpClient) { }
+
+  executeJWTAuthenticationService(username, password) {
+
+    return this.http.post<any>(
+      'http://localhost:8080/authenticate', {
+        username,
+        password
+      }).pipe(
+      map(
+        data => {
+          console.log('executeJWTAuthenticationService, logged in ok, adding auth user to seassion storage');
+          sessionStorage.setItem(AUTHENTICATED_USER, username);
+          sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+          return data;
+        }
+      )
+    );
+    // console.log("Execute Hello World Bean Service")
+  }
+
+  //
+  // executeAuthenticationService(username, password) {
+  //
+  //   console.log('basic authentication service...');
+  //   const basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+  //   const urlString =  'http://localhost:8080/basicauth';
+  //   console.log('the urlstring is: ' + urlString);
+  //   const headers = new HttpHeaders({
+  //     Authorization: basicAuthHeaderString
+  //   });
+  //
+  //   return this.http.get<AuthenticationBean>(
+  //     urlString,
+  //     {headers}).pipe(
+  //     map(
+  //       data => {
+  //         console.log('logged in ok, adding auth user to seassion storage');
+  //         sessionStorage.setItem(AUTHENTICATED_USER, username);
+  //         sessionStorage.setItem(TOKEN, basicAuthHeaderString);
+  //         return data;
+  //       }
+  //     )
+  //   );
+  //   // console.log("Execute Hello World Bean Service")
+  // }
+
+  getAuthenticatedUser() {
+    return sessionStorage.getItem(AUTHENTICATED_USER);
+  }
+
+  getAuthenticatedToken() {
+    if (this.getAuthenticatedUser()) {
+      return sessionStorage.getItem(TOKEN);
+    }
+  }
+
+  isUserLoggedIn() {
+    const user = sessionStorage.getItem(AUTHENTICATED_USER);
+    return !(user === null);
+  }
+
+  logout() {
+    sessionStorage.removeItem(AUTHENTICATED_USER);
+    sessionStorage.removeItem(TOKEN);
+  }
+
+}
+
+export class AuthenticationBean {
+  constructor(public message: string) { }
+}

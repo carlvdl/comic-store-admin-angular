@@ -9,11 +9,12 @@ import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LogoutComponent } from './logout/logout.component';
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
 import { AdminUserEditComponent } from './admin-user-edit/admin-user-edit.component';
+import {HttpInterceptorBasicAuthService} from '../services/http-interceptor-basic-auth.service';
 
 // import { NgbdDropdownBasic } from './dropdown-basic';
 
@@ -36,7 +37,11 @@ import { AdminUserEditComponent } from './admin-user-edit/admin-user-edit.compon
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

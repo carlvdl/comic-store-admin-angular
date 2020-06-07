@@ -8,7 +8,8 @@ import {AdminUserListComponent} from './admin-user-list/admin-user-list.componen
 import {AdminUserEditComponent} from './admin-user-edit/admin-user-edit.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent, canActivate: [RouteGuardService]},
+  // {path: 'home', component: HomeComponent, canActivate: [RouteGuardService]},
+  {path: 'home', component: HomeComponent},
 
   {path: 'adminUsers', component: AdminUserListComponent, canActivate: [RouteGuardService]},
   // {path: 'adminUser', component: AdminUserListComponent, canActivate: [RouteGuardService]},

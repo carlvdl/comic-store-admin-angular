@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AdminUser} from '../models/AdminUser';
 import {AdminUserService} from '../../services/admin-user.service';
@@ -22,7 +22,8 @@ export class AdminUserEditComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private adminUserService: AdminUserService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
 
@@ -59,7 +60,7 @@ export class AdminUserEditComponent implements OnInit {
 
       // 1 update admin user
       console.log('part 1 update admin user...');
-      this.adminUserService.updateAdminUser (this.adminUser)
+      this.adminUserService.updateAdminUser(this.adminUser)
         .subscribe(() => {
           console.log('Updating...');
           this.router.navigate([this.adminUsersListUrl]);
@@ -73,16 +74,14 @@ export class AdminUserEditComponent implements OnInit {
     } else {
       console.log('saving new..');
       const formData = new FormData();
-      // this.fileToUpload = files.item(0);
     }
   }
 
   // https://stackblitz.com/edit/angular-file-upload?file=app%2Fapp.component.ts
   upload(files: FileList) {
-    console.log('upload file...');
+    console.log('save to browser...');
     this.fileToUpload = files.item(0);
-    // this.uploadAndProgress(files);
   }
 
- 
+
 }
